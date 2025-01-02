@@ -2,10 +2,14 @@ package io.sc3.plethora.gameplay.neural;
 
 import dan200.computercraft.api.peripheral.IPeripheral;
 import dan200.computercraft.api.pocket.IPocketAccess;
+import dan200.computercraft.api.pocket.IPocketUpgrade;
+import dan200.computercraft.api.upgrades.UpgradeData;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Vec3d;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -21,6 +25,16 @@ public class NeuralPocketAccess implements IPocketAccess {
 
     public NeuralPocketAccess(NeuralComputer neural) {
         this.neural = neural;
+    }
+
+    @Override
+    public ServerWorld getLevel() {
+        return neural.getLevel();
+    }
+
+    @Override
+    public Vec3d getPosition() {
+        return neural.getPosition().toCenterPos();
     }
 
     @Nullable
@@ -45,6 +59,16 @@ public class NeuralPocketAccess implements IPocketAccess {
 
     @Override
     public void setLight(int colour) {}
+
+    @Override
+    @Nullable
+    public UpgradeData<IPocketUpgrade> getUpgrade() {
+        return null;
+    }
+
+    @Override
+    public void setUpgrade(@Nullable UpgradeData<IPocketUpgrade> upgrade) {
+    }
 
     @Nonnull
     @Override

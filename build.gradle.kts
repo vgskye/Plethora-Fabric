@@ -5,7 +5,7 @@ plugins {
   val kotlinVersion: String by System.getProperties()
   kotlin("jvm").version(kotlinVersion)
 
-  id("fabric-loom") version "1.6-SNAPSHOT"
+  id("fabric-loom") version "1.9-SNAPSHOT"
   id("maven-publish")
   id("signing")
   id("com.modrinth.minotaur") version "2.+"
@@ -54,6 +54,11 @@ tasks.withType<KotlinCompile>().configureEach {
   }
 }
 
+tasks.withType<JavaCompile>().configureEach {
+  targetCompatibility = "17"
+  sourceCompatibility = "17"
+}
+
 repositories {
   mavenLocal {
     content {
@@ -69,7 +74,7 @@ repositories {
     }
   }
 
-  maven("https://squiddev.cc/maven") {
+  maven("https://maven.squiddev.cc/") {
     content {
       includeGroup("cc.tweaked")
       includeModule("org.squiddev", "Cobalt")
